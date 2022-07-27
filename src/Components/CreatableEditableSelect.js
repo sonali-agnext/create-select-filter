@@ -1,10 +1,7 @@
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
 import React,{useState, useMemo} from 'react';
-import User from '../Components/User/User';
-import Device from "./Device/Device";
-import Customer from "./Customer/Customer";
-import Location from "./Location/Location";
+import ModalComponent from "./ModalComponent/ModalComponent";
 
 export default function CreateableEditableSelect({model,statusOptions}) {
 
@@ -12,6 +9,8 @@ export default function CreateableEditableSelect({model,statusOptions}) {
   const [defaultValue, setDefaultValue] = React.useState('');
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [labelName, setLabelName] = React.useState('');
+
+  // let ModelComponent = model;
 
   const createOption = (value) => {
 
@@ -57,51 +56,27 @@ export default function CreateableEditableSelect({model,statusOptions}) {
       {/* if create flag is true then use CreateSelect otherwise use Select only */}
       {createFlag ?
       <CreatableSelect
-        isClearable
+        isClearable={true}
         options={selectOptions}
         value={defaultValue}
         // isValidNewOption={() => createFlag ? true: false }   
         formatCreateLabel={formatCreateLabel }        
         onCreateOption={handleCreate}
       />:<Select
-        isClearable
+        isClearable={true}
         options={selectOptions}
         formatCreateLabel={formatCreateLabel }        
         onCreateOption={handleCreate}
       />}
 
       {/* User Modal */}
-      {model === 'User' && <User 
+      <ModalComponent
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         labelName={labelName}
         onSubmit={onSubmit}
         model={model}
-        /> }
-      
-      {/* Device Modal */}
-      {model === 'Device' && <Device 
-        modalIsOpen={modalIsOpen}
-        closeModal={closeModal}
-        onSubmit={onSubmit}
-        model={model}
-        /> }
-
-      {/* Customer Modal */}    
-      {model === 'Customer' && <Customer 
-          modalIsOpen={modalIsOpen}
-          closeModal={closeModal}
-          onSubmit={onSubmit}
-          model={model}
-          /> }
-
-      {/* Location Modal */} 
-      {model === 'Location' && <Location 
-          modalIsOpen={modalIsOpen}
-          closeModal={closeModal}
-          onSubmit={onSubmit}
-          model={model}
-          /> }
+      /> 
       
     </div>);
 }

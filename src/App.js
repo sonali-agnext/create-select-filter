@@ -7,7 +7,7 @@ import { statusOptions } from './data/Data';
 function App() {
   return (
     <div className="App">      
-      <CreateableEditableSelect model='User' statusOptions={statusOptions} />
+      <CreateableEditableSelect model='Device' statusOptions={statusOptions} />
     </div>
   );
 }

@@ -1,7 +1,18 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-export default function Device({modalIsOpen, closeModal, initialValues, validationSchema, onSubmit, model}){
+export default function Device({modalIsOpen, closeModal, onSubmit, model, labelName}){
+    const initialValues = {
+        id: "",
+        name: labelName,
+      };
+      
+    const validationSchema = Yup.object().shape({
+        id: Yup.string().required("Id is required"),
+        name: Yup.string().required("Name is required"),
+    });
+
     return (
         <div>
             <Modal show={modalIsOpen} onHide={closeModal}>

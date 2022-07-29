@@ -5,20 +5,19 @@ import Device from "../Device/Device";
 import Customer from "../Customer/Customer";
 import Location from "../Location/Location";
 
-class ModalComponent extends React.Component {
-    components = {
-        User: User,
-        Device: Device,
-        Customer: Customer,
-        Location: Location,
-    };
-    render() {
-       const TagName = this.components[this.props.model || 'User'];
-       return <TagName modalIsOpen={this.props.modalIsOpen}
-       closeModal={this.props.closeModal}
-       labelName={this.props.labelName}
-       onSubmit={this.props.onSubmit}
-       model={this.props.model} />
-    }
+const components = {
+    User: User,
+    Device: Device,
+    Customer: Customer,
+    Location: Location,
+};
+function ModalComponent(props) {
+
+       const TagName = components[props.model || 'User'];
+       return <TagName modalIsOpen={props.modalIsOpen}
+       closeModal={props.closeModal}
+       labelName={props.labelName}
+       onSubmit={props.onSubmit}
+       model={props.model} />
 }
 export default ModalComponent;

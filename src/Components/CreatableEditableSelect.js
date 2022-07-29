@@ -40,6 +40,11 @@ export default function CreateableEditableSelect({model,statusOptions}) {
     }, 1000);
   };
   
+  const handleOnChange = (event) => {
+    setDefaultValue(event);
+    // const newOption = { label: (defaultValue !== '' ? defaultValue.label : ''), defaultValue: (defaultValue !== '' ? defaultValue.value : '') };
+    console.log(event,  defaultValue,selection.selection);
+  };
 
   // add new dataresource in dropdown
   const onSubmit = (fields) => {    
@@ -52,16 +57,15 @@ export default function CreateableEditableSelect({model,statusOptions}) {
   const selectOptions = useMemo(() => selection.map(x => ({ value: x.id, label: x.name }),[selection]));
   return (
     <div>
-      {/* {defaultValue} */}
       {/* if create flag is true then use CreateSelect otherwise use Select only */}
       {createFlag ?
       <CreatableSelect
         isClearable={true}
         options={selectOptions}
-        value={defaultValue}
-        // isValidNewOption={() => createFlag ? true: false }   
+        value={defaultValue} 
         formatCreateLabel={formatCreateLabel }        
         onCreateOption={handleCreate}
+        onChange={handleOnChange}
       />:<Select
         isClearable={true}
         options={selectOptions}
